@@ -201,11 +201,12 @@ def Get_command_line_arguments():
         type=str.upper, help='Handle special XML characters')
     parser.add_argument('infile', help='SVG input file')
     parser.add_argument(
-        '--delimiter', choices=['comma','semicolon','space','tab'], required=True, type=str.upper,
+        '--delimiter', choices=['comma','semicolon','space','tab'], default='comma', type=str,
         help='Delimiter used in CSV file')
 
     args = parser.parse_known_args()[0]
     return args
+
 
 def Get_delimiter_char(delimiter):
     if delimiter == "comma":
