@@ -15,6 +15,13 @@
     <_item value="name">column name</_item>
   </param>
 
+  <param name="delimiter" type="enum" gui-text="CSV Delimiter">
+    <item value="comma">comma</item>
+    <item value="semicolon">semicolon</item>
+    <item value="space">space</item>
+    <item value="tab">tab</item>
+  </param>
+
   <param name="sep" type="description">•••••••••••••••••••••••••••••••••••••••••••••••••••••••••</param>
 
   <_param name="info1" type="description">Extra textual values to be replaced:</_param>

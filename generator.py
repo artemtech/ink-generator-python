@@ -200,9 +200,22 @@ def Get_command_line_arguments():
         '--specialchars', choices=['TRUE', 'FALSE'], default='TRUE',
         type=str.upper, help='Handle special XML characters')
     parser.add_argument('infile', help='SVG input file')
+    parser.add_argument(
+        '--delimiter', choices=['comma','semicolon','space','tab'], required=True, type=str.upper,
+        help='Delimiter used in CSV file')
 
     args = parser.parse_known_args()[0]
     return args
+
+def Get_delimiter_char(delimiter):
+    if delimiter == "comma":
+        return ','
+    elif delimiter == "semicolon":
+        return ';'
+    elif delimiter == "space":
+        return ' '
+    elif delimiter == "tab":
+        return '\t'
 
 
 def Generate(replacements):
@@ -321,9 +334,9 @@ def Open_file_viewer(filename):
 def Process_csv_file(csvfile):
     if globaldata.args.vartype == 'COLUMN':
         csvdata = [[(str(x), y) for x, y in enumerate(row, start=1)]
-                   for row in csv.reader(csvfile)]
+                   for row in csv.reader(csvfile, delimiter=Get_delimiter_char(globaldata.args.delimiter))]
     else:
-        csvdata = [row.items() for row in csv.DictReader(csvfile)]
+        csvdata = [row.items() for row in csv.DictReader(csvfile, delimiter=Get_delimiter_char(globaldata.args.delimiter))]
 
     csvdata = Prepare_data(csvdata)
 
